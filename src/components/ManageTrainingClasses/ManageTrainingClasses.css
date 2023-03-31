@@ -1,0 +1,29 @@
+.training-layout {
+  border-radius: 15px;
+    box-shadow: 3px 3px 5px 1.5px lightgray;
+    margin-top: 20px;
+    padding: 30px;
+}
+
+.training-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #8323ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: #ffff;
+}
+
+.arrow {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+
+.calendar-layout {
+    height: 500px;
+    background-color: #fff;
+    padding-bottom: 30px;
+}

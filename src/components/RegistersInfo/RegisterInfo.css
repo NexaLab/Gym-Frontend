@@ -1,0 +1,30 @@
+.info-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+}
+.table-head, .table-data {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: #ffffff;
+}
+.table-head {
+    background-color: #8323ff;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #ffffff;
+}
+
+.delete-span {
+    cursor: pointer;
+    color: red;
+}
