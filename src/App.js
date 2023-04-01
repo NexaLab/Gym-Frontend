@@ -1,7 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Test from './components/Test/Test';
+import ManageTrainingClasses from './components/ManageTrainingClasses/ManageTrainingClasses';
+import Sidebar from './components/Sidebar/CustomSideBar';
 import Welcome from './components/Welcome/Welcome';
 
 
@@ -12,9 +13,10 @@ function App() {
     <div className="App">
       
       <Switch>
-
+            <Route exact path="/"  component={Test}/>
+            <Route exact path="/ManageTrainingClasses"  component={ManageTrainingClasses}/>
+            <Route exact path="/sidebar" component={Sidebar}/>
             <Route exact path="/"  component={Welcome}/>
-
       </Switch>
 
     </div>

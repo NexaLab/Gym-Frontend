@@ -1,0 +1,64 @@
+#side-bar-component {
+  width: 48px !important;
+  height: 99.9vh !important;
+  background-color: #8323ff;
+  border: 0.3px solid #8323ff !important;
+  padding-top: 24px !important ;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 3px 3px 5px 1.5px lightgray !important;
+  border-radius: 8px !important;
+}
+
+#side-bar-heading {
+  font-family: "Fira Sans", sans-serif !important;
+  color: white !important;
+  font-weight: bolder !important;
+  font-size: 23px !important;
+  text-align: center !important;
+}
+
+#side-bar-content-container {
+  width: 100% !important;
+  height: 50px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  border: 1px solid yellow !important;
+  padding-top: 40px !important ;
+  position: relative !important;
+  background: transparent !important;
+  padding-left: 30px !important;
+}
+
+.side-bar-content {
+  font-family: Lato, Poppins, Muli, sans-serif;
+  font-size: 16px !important;
+  font-weight: 549 !important;
+  margin-left: 12.5px !important;
+  color: #ffffff;
+}
+
+#calendar-icon {
+  transition: transform 0.5s ease-in-out, color 0.5s ease-in-out !important;
+}
+
+#calendar-icon:hover {
+  transform: translateY(-8px) !important;
+
+  color: white !important;
+}
+
+#home-icon {
+  transition: transform 0.5s ease-in-out, color 0.5s ease-in-out !important;
+}
+
+#home-icon:hover {
+  transform: translateY(-8px) !important;
+
+  color: white !important;
+}
