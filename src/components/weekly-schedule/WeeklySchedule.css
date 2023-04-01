@@ -1,0 +1,45 @@
+.main-layout{
+    box-sizing: border-box;
+    border-radius: 15px;
+    display: flex;
+    box-shadow: 3px 3px 5px 1.5px lightgray;
+    background-color: white;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #8323ff;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.content-table{
+}
+
+#t1{
+    font-size: 20px;
+    color: grey;
+}
+
+.modal-layout{
+    display: flex;
+    background-color: white;
+}
+
+@media (max-Width: 500px) {
+    .header{
+        font-size: 80%;
+    }
+}
+@media (max-Width: 330px){
+    .header{
+        font-size: 70%;
+    }
+    .main-layout{
+        width: 330px;
+    }
+}
