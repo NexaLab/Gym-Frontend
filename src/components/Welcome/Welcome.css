@@ -1,0 +1,28 @@
+.welcome-main{
+    box-sizing: border-box;
+    border-radius: 15px;
+    display: flex;
+    box-shadow: 3px 3px 5px 1.5px lightgray;
+    height: 100vh;
+    background-color: white;
+}
+
+.header-welcome{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #8323ff;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 15px 15px 0px 0px;
+
+
+}
+
+.content-welcome{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
