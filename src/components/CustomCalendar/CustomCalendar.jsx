@@ -100,7 +100,9 @@ function CustomCalendar() {
 
 
 
- 
+ useEffect(() => {
+  getAllTrainingClasses()
+ },[])
 
 
 
@@ -162,9 +164,7 @@ function CustomCalendar() {
 
 
 
-  useEffect(() => {
-    getAllTrainingClasses()
-  }, [])
+
 
   return (
     <>
