@@ -1,59 +1,28 @@
-import React, { useState , memo} from 'react'
+import React, { useState , memo, useEffect} from 'react'
 import './RegisterInfo.css'
+import ClientInfoService from '../../services/ClientInfoService'
 
 
 
 
 
 function RegisterInfo() {
-const [lists , setLists] = useState([
+const [lists , setLists] = useState([])
 
-    {
-        id: 1,
-        name: 'rafay',
-        phoneno: '03353801076',
-        email: 'abdulrafay00@gmail.com',
-        class: 'gym',
-    
-    
-    },
-    {
-        id: 2,
-        name: 'anas',
-        phoneno: '03212468501',
-        email: 'anas00@gmail.com',
-        class: 'gym',
-    
-    
-    },
-    {
-        id: 3,
-        name: 'afshal',
-        phoneno: '0331378902',
-        email: 'afshal00@gmail.com',
-        class: 'gym',
-    
-    
-    },
-    {
-        id: 4,
-        name: 'aneeque',
-        phoneno: '03345678909',
-        email: 'aneeque00@gmail.com',
-        class: 'gym',
-    
-    
-    },
-    {
-        id: 5,
-        name: 'ashraf',
-        phoneno: '03345678909',
-        email: 'aneeque00@gmail.com',
-        class: 'gym',
-    
-    
-    }
-])
+const getAllClients = () => {
+
+    ClientInfoService.getAllClients().then((res) => {
+
+        console.log(res)
+        setLists(res.data.data)
+
+
+    }).catch(err => {
+        console.log(err)
+      })
+
+
+}
 
     const deleteItem = (list) => {
        const newList  = lists.filter((l) => l.id !== list.id
@@ -63,6 +32,12 @@ const [lists , setLists] = useState([
     
 
     }
+
+    useEffect(() => {
+        getAllClients()
+    },[])
+
+
   return (
     <>
      <span className='heading'>
@@ -82,13 +57,13 @@ const [lists , setLists] = useState([
     {lists.map((list, index) => (
         <tr key={index}>
        <td className='table-data'>
-        {list.name}
+        {list.firstName}
        </td>
        <td className='table-data'>
-        {list.phoneno}
+        {list.phoneNo}
        </td>
        <td className='table-data'>{list.email}</td>
-       <td className='table-data'>{list.class}</td>
+       <td className='table-data'>{list.Class}</td>
        <td className='table-data'><span className='delete-span' onClick= { () => (deleteItem(list))}>Delete </span></td>
 </tr>
 ))}

@@ -24,36 +24,9 @@ function CustomCalendar() {
     endDate: ''
   })
 
-  const getAllTrainingClasses = () => {
-    ManageTrainingClassesService.getAllTrainingClasses().then(res => {
-      console.log(res.data.data)
-    for(let i =0 ; i < res.data.data.length ; i++ ) {
-      
-      setEvent([...events, {
-        id: res.data.data[i].id, 
-        title: (<>
-       Class:  {res.data.data[i].class } <br />
-       Coach:   {res.data.data[i].coach
-      }
-          </>),
-          start: new Date(res.data.data[i].time),
-          end:  new Date(res.data.data[i].time)
-      }])
-
-    }
-      
-     
-
-     
-    }).catch(err => {
-      console.log(err)
-    })
-
-  }
   
- 
- console.log(events)
-
+      
+     
 
 
   const showModal = () => {
@@ -83,9 +56,7 @@ function CustomCalendar() {
 
   
 
-  useEffect(() => {
-    getAllTrainingClasses()
-  }, [])
+
 
   return (
     <>
