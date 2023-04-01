@@ -2,6 +2,7 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import { Modal, Button, Form, Input, DatePicker, TimePicker, Select } from "antd";
 import ManageTrainingClassesService from "../../services/ManageTrainingClassesService";
 import CoachService from "../../services/CoachService";
+import set from "date-fns/esm/set/index";
 
 
 
@@ -15,7 +16,7 @@ const { Option } = Select;
 function CustomModal({ isModalOpen, setIsModalOpen, id, start, Class, coach, end, coachID, events, setEvents, saveStatus }) {
 
 
-console.log(coach)
+
 
 
   //Updated Strings  
@@ -90,11 +91,38 @@ console.log(coach)
 
 
 
+
+
+
+      const updatedEvents = [...events,{
+        id: Math.random(),
+        coachID: coachID,
+  
+        title: (<>
+          Class:  {values.Class} <br />
+          Coach: {selectedCoach.first_name + " " + selectedCoach.last_name}
+        </>),
+  
+  
+        start: new Date(values.datePickerFieldName.$d),
+        end: new Date(values.datePickerFieldName.$d)
+      }];
+
+
+
+
+
+      setEvents(updatedEvents);
+
+
+
+
+
       ManageTrainingClassesService.saveTrainingSchedule(data)
       .then(res => {
 
 
-        console.log(res.data.data);
+        setIsModalOpen(false);
 
       })
       .catch(error => {
@@ -105,7 +133,8 @@ console.log(coach)
 
       })
 
-
+      
+   
     } 
     
 
@@ -179,7 +208,7 @@ console.log(coach)
 
 
 
-
+  console.log(events);
 
 
 
