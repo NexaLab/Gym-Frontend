@@ -3,9 +3,22 @@
     border-radius: 15px;
     display: flex;
     box-shadow: 3px 3px 5px 1.5px lightgray;
-    height: 100vh;
+    height: 150vh;
     background-color: white;
+    width: 95% !important;
 }
+
+
+
+#home-component-with-sidebar {
+
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+
+
+
 
 .header-welcome{
     display: flex;

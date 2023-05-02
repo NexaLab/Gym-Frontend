@@ -1,19 +1,26 @@
 import React, { useState , memo, useEffect} from 'react'
 import './RegisterInfo.css'
 import ClientInfoService from '../../services/ClientInfoService'
-
+import ManageTrainingClassesService from '../../services/ManageTrainingClassesService'
 
 
 
 
 function RegisterInfo() {
+
+
+
+
 const [lists , setLists] = useState([])
+
+
+
+
 
 const getAllClients = () => {
 
     ClientInfoService.getAllClients().then((res) => {
 
-        console.log(res)
         setLists(res.data.data)
 
 
@@ -25,16 +32,40 @@ const getAllClients = () => {
 }
 
     const deleteItem = (list) => {
-       const newList  = lists.filter((l) => l.id !== list.id
-            
-       )
+      
+       const newList  = lists.filter(l => l.id !== list.id )
        setLists(newList);
-    
+      
+
+
+
+       ManageTrainingClassesService.deleteTrainingSchedule(list.id)
+       .then(res => {
+
+
+        console.log(res.data);
+
+
+       })
+       .catch(error => {
+
+
+        console.log(error);
+
+
+       })
 
     }
 
+
+
+
     useEffect(() => {
+
+
         getAllClients()
+
+
     },[])
 
 

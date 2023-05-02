@@ -208,7 +208,7 @@ function CustomModal({ isModalOpen, setIsModalOpen, id, start, Class, coach, end
 
 
 
-  console.log(events);
+ 
 
 
 

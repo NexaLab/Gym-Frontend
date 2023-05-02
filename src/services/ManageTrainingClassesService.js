@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getAllTrainingClassesApiUrl, saveTrainingScheduleApiUrl, updateTrainingScheduleApiUrl } from '../apis/ApiUrls'
+import { deleteScheduleByIdApiUrl, getAllTrainingClassesApiUrl, saveTrainingScheduleApiUrl, updateTrainingScheduleApiUrl } from '../apis/ApiUrls'
 
 
 
@@ -23,6 +23,15 @@ class ManageTrainingClassesService {
         return axios.post(saveTrainingScheduleApiUrl(),data);
     }
 
+
+
+
+    
+
+    async deleteTrainingSchedule(scheduleID) {
+
+        return axios.delete(deleteScheduleByIdApiUrl(scheduleID));
+    }
 
 
 

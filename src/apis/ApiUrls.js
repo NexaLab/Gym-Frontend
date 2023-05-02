@@ -22,6 +22,19 @@ export const updateTrainingScheduleApiUrl = (scheduleID) => {
 
 
 
+
+
+export const deleteScheduleByIdApiUrl = (scheduleID) => {
+
+
+    return `http://localhost:3001/training-classes/delete/${scheduleID}`
+}
+
+
+
+
+
+
 export const saveTrainingScheduleApiUrl = () => {
 
 
