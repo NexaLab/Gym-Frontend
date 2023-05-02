@@ -1,0 +1,16 @@
+.barcode-header {
+
+    background-color: #ffff;
+    color: gray;
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+}
+
+.ant-table-thead .ant-table-cell{
+    background-color: #8323ff !important;
+    color: #ffffff !important;
+}
