@@ -11,8 +11,7 @@
 }
 
 .ant-table-thead .ant-table-cell{
-    background-color: #8323ff !important;
-    color: #ffffff !important;
+    background-color: lightgray !important;
 }
 
 .edit-span {

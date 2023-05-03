@@ -1,25 +1,31 @@
-import React from 'react'
-import { Layout } from 'antd'
+import React from "react";
+import { Layout } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import './QrCode.css'
-import QrCodeTable from './QrCodeTable/QrCodeTable';
+import "./QrCode.css";
+import QrCodeTable from "./QrCodeTable/QrCodeTable";
+import QrForm from "./QrForm/QrForm";
 
-const {Header, Content} = Layout
+
+const { Header, Content } = Layout;
+
 function QrCode() {
+
+ 
+
   return (
     <Layout>
-
-<Header className="qr-header">
+      <Header className="qr-header">
         <h1>Barcode</h1>
         <ArrowRightOutlined className="qr-arrow" />
       </Header>
-      <Content>
+      <Content className="qrCode-content">
+        <QrForm />
         <Layout className="qrTable-layout">
           <QrCodeTable />
         </Layout>
       </Content>
     </Layout>
-  )
+  );
 }
 
-export default QrCode
+export default QrCode;
