@@ -1,4 +1,4 @@
-import { Layout, Table } from "antd";
+import { Layout, Table , Space} from "antd";
 import React from "react";
 import './QrCodeTable.css'
 
@@ -20,6 +20,13 @@ const columns = [
     {
         title: 'Action',
         dataIndex: 'action',
+        render: () => (
+          <Space size="middle">
+        <span className="edit-span">Edit</span>|
+        <span className="delete-span">Delete</span>
+      </Space>
+
+        )
       }
   ];
   const data = [
@@ -28,42 +35,40 @@ const columns = [
       name: 'Fitness Gym',
       link: 'https://www.google.com',
       qr: 'xyz',
-      action: 'Edit | Delete'
     },
     {
       key: '2',
       name: 'Fitness Gym',
       link: 'https://www.google.com',
       qr: 'xyz',
-      action: 'Edit | Delete'
+    
     },
     {
       key: '3',
       name: 'Fitness Gym',
       link: 'https://www.google.com',
       qr: 'xyz',
-      action: 'Edit | Delete'
+     
     },
     {
         key: '4',
         name: 'Fitness Gym',
         link: 'https://www.google.com',
         qr: 'xyz',
-        action: 'Edit | Delete'
+     
       },
       {
         key: '5',
         name: 'Fitness Gym',
         link: 'https://www.google.com',
         qr: 'xyz',
-        action: 'Edit | Delete'
+      
       },
       {
         key: '6',
         name: 'Fitness Gym',
         link: 'https://www.google.com',
         qr: 'xyz',
-        action: 'Edit | Delete'
       },
   ];
 

@@ -4,6 +4,7 @@ import Test from './components/Test/Test';
 import ManageTrainingClasses from './components/ManageTrainingClasses/ManageTrainingClasses';
 import Welcome from './components/Welcome/Welcome';
 import QrCodeTable from './components/QrCode/QrCodeTable/QrCodeTable';
+import QrCode from './components/QrCode/QrCode';
 
 
 
@@ -14,7 +15,7 @@ function App() {
       
       <Switch>
             {/* <Route exact path="/meetingschedule"  component={ManageTrainingClasses}/> */}
-            <Route exact path="/"  component={QrCodeTable}/>
+            <Route exact path="/"  component={QrCode}/>
       </Switch>
 
     </div>

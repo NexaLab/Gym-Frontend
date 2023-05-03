@@ -1,0 +1,23 @@
+.qr-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #8323ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: #ffff;
+}
+
+
+
+.qr-arrow {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.qrTable-layout {
+    height: 500px;
+    background-color: #fff;
+    padding-bottom: 30px;
+}

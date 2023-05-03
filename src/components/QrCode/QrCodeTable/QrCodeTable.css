@@ -14,3 +14,15 @@
     background-color: #8323ff !important;
     color: #ffffff !important;
 }
+
+.edit-span {
+    color: green;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-span {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
