@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./Chat.css";
 import { Layout } from "antd";
 import Users from "../Users/Users";
@@ -13,4 +13,4 @@ function Chat() {
   );
 }
 
-export default Chat;
+export default memo(Chat);

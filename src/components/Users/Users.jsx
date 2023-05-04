@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { getAllClients } from "../../services/ClientSlice";
 import { getPrivateRoomOfUser } from "../../services/PrivateRoomSlice";
 import { updateSenderAndReceiverData } from "../../services/SenderAndReceiverSlice";
-
+import { memo } from "react";
 
 
 
@@ -24,11 +24,9 @@ function Users() {
 
   const dispatch = useDispatch();
   const clients = useSelector((state) => state.clientSlice);
-  const senderAndReceiver = useSelector(state => state.senderAndReceiverSlice);
 
 
 
-  console.log(senderAndReceiver)
 
 
 
@@ -108,4 +106,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default memo(Users);

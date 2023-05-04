@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import "./Messages.css";
-import { Layout, Typography, Input, Progress } from 'antd'
+import { Layout, Typography, Input } from 'antd'
 import Person from "../../assets/Person.jpg";
 import { SendOutlined } from '@ant-design/icons';
 import io from "socket.io-client";
@@ -33,7 +33,6 @@ function Messages() {
 
 
 
-    console.log(messages)
 
 
 
@@ -57,18 +56,14 @@ function Messages() {
 
 
 
+    const sendMessage = async () => {
 
-    const sendMessage = () => {
-
-
-        console.log("click");
-
-
+        socket.emit("send-message", { message: "Hello", room: privateRoomOfUser.data.id, messageSender: senderAndReceiver.data.messageSender, messageReceiver: senderAndReceiver.data.messageReceiver });
         dispatch(updateMessages({
             email: senderAndReceiver.data.messageSender,
             message: "Hello"
         }))
-        socket.emit("send-message", { message: "Hello", room: privateRoomOfUser.data.id, messageSender: senderAndReceiver.data.messageSender, messageReceiver: senderAndReceiver.data.messageReceiver });
+
 
 
 
@@ -82,9 +77,8 @@ function Messages() {
 
     const receiveMessage = () => {
         socket.off("receive-message").on("receive-message", (data) => {
-            console.log(data);
             setArrivalMessage({
-                email: senderAndReceiver.messageReceiver, message: data.message
+                email: senderAndReceiver.data.messageReceiver, message: data.message
             });
         }, [socket]);
     }
@@ -99,7 +93,7 @@ function Messages() {
 
         joinRoom();
         receiveMessage();
-    }, [privateRoomOfUser]);
+    }, [privateRoomOfUser.data]);
 
 
 
@@ -113,7 +107,15 @@ function Messages() {
         arrivalMessage && dispatch(updateMessages(arrivalMessage));
 
 
-    }, [arrivalMessage])
+    }, [arrivalMessage]);
+
+
+
+
+
+    // useEffect(() => {
+
+    // }, [messages])
 
 
 
@@ -136,7 +138,7 @@ function Messages() {
             <div id='messages-container'>
 
                 {
-                    messages.data && messages.data.map((m, i) => m.email === senderAndReceiver.messageSender ? <div className='outgoing-messages' key={i}>{m.message}</div> : <div className='incoming-messages' key={i}>{m.message}</div>)
+                    messages.data && messages.data.map((m, i) => m.email === senderAndReceiver.data.messageSender ? <div className='outgoing-messages' key={i}>{m.message}</div> : <div className='incoming-messages' key={i}>{m.message}</div>)
                 }
 
 
@@ -153,4 +155,4 @@ function Messages() {
     )
 }
 
-export default Messages
+export default memo(Messages)

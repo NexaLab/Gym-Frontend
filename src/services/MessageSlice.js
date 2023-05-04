@@ -23,7 +23,10 @@ const MessageSlice = createSlice({
     reducers: {
 
         updateMessages: (state, action) => {
-            state.data.push(action.payload)
+            return {
+                ...state,
+                data: [...state.data, action.payload]
+            };
 
         }
     }
