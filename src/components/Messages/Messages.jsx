@@ -32,6 +32,8 @@ function Messages() {
 
 
 
+    const [message, setMessage] = useState("");
+
 
 
 
@@ -58,10 +60,10 @@ function Messages() {
 
     const sendMessage = async () => {
 
-        socket.emit("send-message", { message: "Hello", room: privateRoomOfUser.data.id, messageSender: senderAndReceiver.data.messageSender, messageReceiver: senderAndReceiver.data.messageReceiver });
+        socket.emit("send-message", { message: message, room: privateRoomOfUser.data.id, messageSender: senderAndReceiver.data.messageSender, messageReceiver: senderAndReceiver.data.messageReceiver });
         dispatch(updateMessages({
             email: senderAndReceiver.data.messageSender,
-            message: "Hello"
+            message: message
         }))
 
 
@@ -83,6 +85,25 @@ function Messages() {
         }, [socket]);
     }
 
+
+
+
+
+
+
+    const onChangeMessageText = (event) => {
+        setMessage(event.target.value)
+    }
+
+
+
+
+    const sendMessageByEnter = (event) => {
+        if (event.key === "Enter") {
+            sendMessage();
+            setMessage("")
+        }
+    }
 
 
 
@@ -146,7 +167,7 @@ function Messages() {
 
 
             <div id='messages-input-container'>
-                <Input id='type-messages' placeholder='Type Something' autoFocus={true} />
+                <Input id='type-messages' placeholder='Type Something' autoFocus={true} value={message} onChange={onChangeMessageText} onKeyUp={sendMessageByEnter} />
                 <SendOutlined id='send-btn' onClick={sendMessage} />
             </div>
 
