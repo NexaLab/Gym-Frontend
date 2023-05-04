@@ -13,7 +13,7 @@ function QrCode() {
  
 
   return (
-    <Layout>
+    <Layout className="main-layout">
       <Header className="qr-header">
         <h1>Barcode</h1>
         <ArrowRightOutlined className="qr-arrow" />
