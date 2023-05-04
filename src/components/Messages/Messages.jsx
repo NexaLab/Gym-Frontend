@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import "./Messages.css";
-import { Layout, Typography, Input } from 'antd'
+import { Layout, Typography, Input, Progress } from 'antd'
 import Person from "../../assets/Person.jpg";
 import { SendOutlined } from '@ant-design/icons';
 import io from "socket.io-client";
@@ -138,7 +138,7 @@ function Messages() {
             <div id='messages-container'>
 
                 {
-                    messages.data && messages.data.map((m, i) => m.email === senderAndReceiver.data.messageSender ? <div className='outgoing-messages' key={i}>{m.message}</div> : <div className='incoming-messages' key={i}>{m.message}</div>)
+                    messages.data && messages.data.map((m, i) => m.email === senderAndReceiver.data.messageSender ? (messages.isLoader == true ? <Progress type="dashboard" percent={50} size={20} className='progress-animation' /> : <div className='outgoing-messages' key={i}>{m.message}</div>) : (messages.isLoader == true ? <Progress type="dashboard" percent={50} size={20} className='progress-animation' /> : <div className='incoming-messages' key={i}>{m.message}</div>))
                 }
 
 

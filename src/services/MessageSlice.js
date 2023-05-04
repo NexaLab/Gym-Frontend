@@ -23,10 +23,9 @@ const MessageSlice = createSlice({
     reducers: {
 
         updateMessages: (state, action) => {
-            return {
-                ...state,
-                data: [...state.data, action.payload]
-            };
+            state.isLoader = true;
+            state.data.push(action.payload);
+            state.isLoader = false;
 
         }
     }
