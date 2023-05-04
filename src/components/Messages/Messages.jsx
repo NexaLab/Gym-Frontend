@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
-import "./Messages.css"
-import { Layout, Typography, Input } from 'antd'
+import React, { useEffect, useState } from 'react'
+import "./Messages.css";
+import { Layout, Typography, Input, Progress } from 'antd'
 import Person from "../../assets/Person.jpg";
 import { SendOutlined } from '@ant-design/icons';
 import io from "socket.io-client";
-
+import { useSelector, useDispatch } from 'react-redux';
+import { updateMessages } from '../../services/MessageSlice';
 
 
 
@@ -24,13 +25,29 @@ const socket = io("http://localhost:3001");
 function Messages() {
 
 
+    const dispatch = useDispatch();
+    const privateRoomOfUser = useSelector(state => state.privateRoomSlice);
+    const senderAndReceiver = useSelector(state => state.senderAndReceiverSlice);
+    const messages = useSelector(state => state.messageSlice);
+
+
+
+
+    console.log(messages)
+
+
+
+    const [arrivalMessage, setArrivalMessage] = useState(null);
 
 
 
 
     const joinRoom = async () => {
-        console.log("room joined")
-        socket.emit("join-room", 1);
+
+
+        if (Object.keys(privateRoomOfUser.data).length != 0) {
+            socket.emit("join-room", privateRoomOfUser.data.id);
+        }
 
 
     }
@@ -42,8 +59,16 @@ function Messages() {
 
 
     const sendMessage = () => {
-        console.log("click")
-        socket.emit("send-message", { message: "Hello", room: 1 });
+
+
+        console.log("click");
+
+
+        dispatch(updateMessages({
+            email: senderAndReceiver.data.messageSender,
+            message: "Hello"
+        }))
+        socket.emit("send-message", { message: "Hello", room: privateRoomOfUser.data.id, messageSender: senderAndReceiver.data.messageSender, messageReceiver: senderAndReceiver.data.messageReceiver });
 
 
 
@@ -58,7 +83,9 @@ function Messages() {
     const receiveMessage = () => {
         socket.off("receive-message").on("receive-message", (data) => {
             console.log(data);
-
+            setArrivalMessage({
+                email: senderAndReceiver.messageReceiver, message: data.message
+            });
         }, [socket]);
     }
 
@@ -72,7 +99,21 @@ function Messages() {
 
         joinRoom();
         receiveMessage();
-    })
+    }, [privateRoomOfUser]);
+
+
+
+
+
+
+
+    useEffect(() => {
+
+
+        arrivalMessage && dispatch(updateMessages(arrivalMessage));
+
+
+    }, [arrivalMessage])
 
 
 
@@ -86,7 +127,7 @@ function Messages() {
             <div id='message-receiver-heading-container'>
                 <img src={Person} alt="" id='message-receiver-image' />
                 <div id='message-receiver-name-and-active-status-container'>
-                    <h4 id='message-receiver-name'>Abdur Rafay</h4>
+                    <h4 id='message-receiver-name'>{senderAndReceiver.data.messageReceiverName}</h4>
                     <h6>Active Now</h6>
                 </div>
             </div>
@@ -94,13 +135,11 @@ function Messages() {
 
             <div id='messages-container'>
 
-                <div className='outgoing-messages'>
-                    yes
-                </div>
+                {
+                    messages.data && messages.data.map((m, i) => m.email === senderAndReceiver.messageSender ? <div className='outgoing-messages' key={i}>{m.message}</div> : <div className='incoming-messages' key={i}>{m.message}</div>)
+                }
 
-                <div className='incoming-messages'>
-                    yes
-                </div>
+
             </div>
 
 
