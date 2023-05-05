@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import Test from './components/Test/Test';
+import Customers from './components/Test/GymCustomer/Customers';
 
 
 
@@ -12,7 +11,7 @@ function App() {
       
       <Switch>
 
-            <Route exact path="/"  component={Test}/>
+            <Route exact path="/"  component={Customers}/>
 
       </Switch>
 
