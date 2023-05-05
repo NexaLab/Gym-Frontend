@@ -1,9 +1,26 @@
 import { Table, Modal, Layout, Divider,Typography } from 'antd';
 import { useState } from 'react';
 import "./CustomTable.css"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllMembership } from "../../services/MembershipSlice";
+
+
 const {Text} = Typography;
 
-function CustomTable() {
+function CustomTable({searchValue}) {
+
+  const [paymentInvoiceOfUser, setPaymentInvoiceOfUser] = useState({})
+
+  const dispatch = useDispatch();
+  const membership = useSelector((state) => state.MembershipSlice);
+
+
+  useEffect(() => {
+    dispatch(getAllMembership());
+  }, []);
+
+
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,104 +40,100 @@ function CustomTable() {
     {
       title: 'Name',
       width: 80,
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'firstName',
+      key: 1,
       fixed: 'left',
     },
     {
       title: 'Phone',
       width: 80,
-      dataIndex: 'phone',
-      key: 'phone',
+      dataIndex: 'phoneNo',
+      key: 2,
       fixed: 'left',
     },
     {
       title: 'Email',
       dataIndex: 'email',
-      key: '1',
+      key: 3,
     },
     {
       title: 'Membership',
-      dataIndex: 'membership',
-      key: '2',
+      dataIndex: 'status',
+      key: 4,
     },
     {
-      title: 'Subscription',
-      dataIndex: 'subscription',
-      key: '3',
+      title: 'Subscription Number',
+      dataIndex: 'membershipId',
+      key: 5,
     },
     {
       title: 'Start Date',
-      dataIndex: 'startDate',
-      key: '4',
+      dataIndex: 'startDate' ,
+      key: 6,
     },
     {
       title: 'End Date',
       dataIndex: 'endDate',
-      key: '5',
+      key: 7,
     },
     {
       title: 'Payment Receipt',
       dataIndex: 'payment',
-      key: 'payment',
+      key: 9,
       width: 100,
-      render: () => <a onClick={showModal} style={{color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgray', padding: 5}}>Invoice</a>,
+      render: () => <span onClick={showModal} style={{color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgray', padding: 5 , cursor: 'pointer'}}>Invoice</span>,
     },
     {
       title: 'Message',
-      key: 'message',
+      key: 10,
       width: 100,
-      render: () => <a style={{color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgreen', padding: 5}} >Message</a>,
+      render: () => <span style={{color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgreen', padding: 5 , cursor: 'pointer'}} >Message</span>,
     },
   ];
 
 
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      phone: 32241,
-      email: 'abcxyz@gmail.com',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      phone: 214124,
-      email: 'abcxyz@gmail.com',
-    },
-  ];
 
 
   return (
-    <Layout>
+    <Layout style={{backgroundColor: 'white'}}>
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={searchValue == "" ? membership.data : membership.data.filter(data => {
+          if(data.firstName.toLocaleUpperCase().indexOf(searchValue.toLocaleUpperCase()) > -1) {
+
+            return data.firstName
+
+          }
+        })}
+        onRow={(record) => ({
+          onClick: () => {
+            // console.log("Clicked row:", record);
+            setPaymentInvoiceOfUser(record)
+          },
+        })}
         scroll={{
           x: 1300,
+        }}
+
+        pagination={{
+          pageSize: 10,
         }}
       />
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <Text style={{display: 'flex', justifyContent: 'center', fontWeight: 700, fontSize: 20}}>Fitness Gym</Text>
         <Divider/>
         <Layout className='payment-details'>
-          <Text>Name: Sara</Text>
-          <Text>Address: KSA</Text>
-          <Text>Mobile: 17421264</Text>
+          <Text>Name: {paymentInvoiceOfUser && paymentInvoiceOfUser.firstName}</Text>
+          <Text>Address: Kazimabad</Text>
+          <Text>Mobile: {paymentInvoiceOfUser && paymentInvoiceOfUser.phoneNo}</Text>
         </Layout>
         <Layout className='payment-data'>
-          <Text>Day</Text>
           <Text>Amount</Text>
         </Layout>
         <Divider/>
         <Layout className='payment-data'>
-          <Text>Saturday</Text>
-          <Text>150$</Text>
-        </Layout>
-        <Divider/>
-        <Layout className='payment-data'>
           <Text>Total</Text>
-          <Text>150$</Text>
+          <Text>{paymentInvoiceOfUser && paymentInvoiceOfUser.price}$</Text>
         </Layout>
         
       </Modal>

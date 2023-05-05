@@ -4,7 +4,7 @@
     display: flex;
     box-shadow: 3px 3px 5px 1.5px lightgray;
     height: 100vh;
-    background-color: white;
+    background: white !important;
 }
 
 .header-tag{
@@ -23,11 +23,13 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
+    background-color: white;
 }
 
 .table-area{
     display: flex;
     flex-direction: column;
+    background-color: white;
 }
 
 #text{
