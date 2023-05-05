@@ -5,7 +5,7 @@ import Person from "../../assets/Person.jpg";
 import { SendOutlined } from '@ant-design/icons';
 import io from "socket.io-client";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateMessages } from '../../services/MessageSlice';
+import { updateMessages, getMessagesOfTwoUsers } from '../../services/MessageSlice';
 
 
 
@@ -35,6 +35,7 @@ function Messages() {
     const [message, setMessage] = useState("");
 
 
+    console.log(messages);
 
 
 
@@ -48,6 +49,14 @@ function Messages() {
 
         if (Object.keys(privateRoomOfUser.data).length != 0) {
             socket.emit("join-room", privateRoomOfUser.data.id);
+            dispatch(getMessagesOfTwoUsers({
+
+
+                userEmail1: senderAndReceiver.data.messageSender,
+                userEmail2: senderAndReceiver.data.messageReceiver
+
+
+            }))
         }
 
 
