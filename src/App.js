@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import Test from './components/Test/Test';
 import Payment from './components/Payment/Payment';
+import store from "./store";
+import { Provider } from "react-redux";
 
 
 
@@ -10,13 +10,14 @@ import Payment from './components/Payment/Payment';
 function App() {
   return (
     <div className="App">
+      <Provider store={store} >
       
       <Switch>
 
             <Route exact path="/"  component={Payment}/>
 
       </Switch>
-
+      </Provider>
     </div>
   );
 }
