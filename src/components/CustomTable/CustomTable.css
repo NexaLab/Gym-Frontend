@@ -1,0 +1,15 @@
+
+
+.payment-details{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-bottom: 50px;
+}
+
+.payment-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+}
