@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import QrCode from "./components/QrCode/QrCode";
 import { Provider } from "react-redux";
 import store from "./store";
 import React, { Suspense } from "react";
@@ -11,6 +10,8 @@ import React, { Suspense } from "react";
 
 const Chat = React.lazy(() => import("./components/Chat/Chat"));
 const ManageTrainingClasses = React.lazy(() => import("./components/ManageTrainingClasses/ManageTrainingClasses"))
+const QrCode = React.lazy(() => import("./components/QrCode/QrCode"));
+const Payment = React.lazy(() => import("./components/Payment/Payment"));
 
 
 
@@ -30,12 +31,12 @@ function App() {
               component={ManageTrainingClasses}
             />
             <Route exact path="/" component={Chat} />
-             <Route exact path="/qrCode" component={QrCode} />
+            <Route exact path="/qrCode" component={QrCode} />
+            <Route exact path="/" component={Payment} />
           </Suspense>
         </Switch>
       </div>
     </Provider>
-
   );
 }
 

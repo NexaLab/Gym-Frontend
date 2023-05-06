@@ -5,24 +5,20 @@ import clientSlice from "./services/ClientSlice"
 import privateRoomSlice from "./services/PrivateRoomSlice";
 import senderAndReceiverSlice from "./services/SenderAndReceiverSlice";
 import messageSlice from "./services/MessageSlice";
-
-
+import PaymentSlice from "./services/PaymentSlice";
 
 
 const store = configureStore({
     reducer: {
+
         videoQRCodeSlice: videoQRCodeSlice,
         loginSlice: loginSlice,
         clientSlice: clientSlice,
         privateRoomSlice: privateRoomSlice,
         senderAndReceiverSlice: senderAndReceiverSlice,
-        messageSlice: messageSlice
-
-
+        messageSlice: messageSlice,
+        PaymentSlice: PaymentSlice
     }
 })
-
-
-
 
 export default store;

@@ -2,7 +2,7 @@ import { Layout, Table, Space, Image, Progress, Modal, Form, Input, notification
 import React, { useEffect, useState } from "react";
 import "./QrCodeTable.css";
 import QRCode from "qrcode";
-import { getAllVideosLinksForQR, deleteVideoOfQRCode, deleteVideoOfQRCodeFromDatabase, updateVideoOfQRCode, updateVideoOfQRCodeInDatabase } from "../../../services/VideoQRCodeSlice";
+import { deleteVideoOfQRCode, deleteVideoOfQRCodeFromDatabase, updateVideoOfQRCode, updateVideoOfQRCodeInDatabase } from "../../../services/VideoQRCodeSlice";
 import { useSelector, useDispatch } from "react-redux"
 
 
