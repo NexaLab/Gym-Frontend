@@ -5,6 +5,9 @@ import Users from "../Users/Users";
 import Messages from "../Messages/Messages";
 
 function Chat() {
+
+
+
   return (
     <div id="chat-layout">
       <Users />

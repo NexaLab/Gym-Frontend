@@ -2,40 +2,50 @@ import { Layout, Button, Form, Input } from "antd";
 import React from "react";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
-
 import { login } from "../../services/LoginSlice"
+import { useHistory } from "react-router-dom";
+
+
 
 function Login() {
-    const [form] = Form.useForm();
+  const [form] = Form.useForm();
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const loginRes = useSelector(state  => state.loginSlice)
-    localStorage.setItem('jwt', loginRes.data)
-
-    console.log(loginRes)
-
-    
-  
+  const loginRes = useSelector(state => state.loginSlice)
+  const history = useHistory();
 
 
-const onFormFinishFailed = (errorInfo) => {
+
+
+
+
+
+  const onFormFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
-};
+  };
 
-const onFinish = (values) => {
-    dispatch(login({email: values.email ,
-     password: values.password
+  const onFinish = (values) => {
+    dispatch(login({
+      email: values.email,
+      password: values.password
     }));
-    form.resetFields()
+    localStorage.setItem('jwt', loginRes && loginRes.data.token)
+    localStorage.setItem('email', loginRes && loginRes.data.email);
+    form.resetFields();
+
+    setTimeout(() => {
+      history.push('/chat');
+    }, 800)
+
   };
 
   return (
     <Layout className="login-page">
-      <Form form={form} className="form-main" layout="vertical"  onFinish={onFinish}
-                onFinishFailed={onFormFinishFailed}
-                autoComplete="off">
-        <h1 style={{fontSize: '50px'}}>Login</h1>
+      <Form form={form} className="form-main" layout="vertical" onFinish={onFinish}
+        onFinishFailed={onFormFinishFailed}
+        autoComplete="off">
+        <h1 style={{ fontSize: '50px' }}>Login</h1>
         <div className="form-container">
           <Form.Item
             label={<p style={{ fontSize: "16px", margin: "0px" }}>Email</p>}

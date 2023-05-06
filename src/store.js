@@ -8,7 +8,6 @@ import messageSlice from "./services/MessageSlice";
 import PaymentSlice from "./services/PaymentSlice";
 import MembershipSlice from "./services/MembershipSlice";
 
-
 const store = configureStore({
     reducer: {
 
@@ -19,7 +18,7 @@ const store = configureStore({
         senderAndReceiverSlice: senderAndReceiverSlice,
         messageSlice: messageSlice,
         PaymentSlice: PaymentSlice,
-        MembershipSlice: MembershipSlice
+        MembershipSlice: MembershipSlice,
     }
 })
 

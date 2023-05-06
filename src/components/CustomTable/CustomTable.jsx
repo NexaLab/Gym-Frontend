@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPayment } from "../../services/PaymentSlice";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { useHistory } from 'react-router-dom';
+import { updateEmail } from '../../services/CurrentReceiverSlice';
 
 
 
@@ -15,6 +17,8 @@ import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-
 function CustomTable({ searchValue }) {
 
   const [paymentInvoiceOfUser, setPaymentInvoiceOfUser] = useState({})
+  const history = useHistory();
+
 
   const dispatch = useDispatch();
   const payment = useSelector((state) => state.PaymentSlice);
@@ -141,6 +145,18 @@ function CustomTable({ searchValue }) {
       key: 9,
       width: 100,
       render: () => <span onClick={showModal} style={{ color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgray', padding: 5, cursor: 'pointer' }}>Invoice</span>,
+    },
+
+    {
+      title: 'Message',
+      dataIndex: 'message',
+      key: 10,
+      width: 100,
+      render: (text, record) => <span onClick={() => {
+
+        history.push('/chat');
+
+      }} style={{ color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'green', padding: 5, cursor: 'pointer' }}>Message</span>,
     }
   ];
 

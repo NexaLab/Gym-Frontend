@@ -35,7 +35,6 @@ function Messages() {
     const [message, setMessage] = useState("");
 
 
-    console.log(messages);
 
 
 
