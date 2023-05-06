@@ -1,6 +1,6 @@
 #side-bar-component {
   width: 48px !important;
-  height: 99.9vh !important;
+  height:150vh !important;
   background-color: #8323ff;
   border: 0.3px solid #8323ff !important;
   padding-top: 24px !important ;
@@ -48,7 +48,7 @@
 }
 
 #calendar-icon:hover {
-  transform: translateY(-8px) !important;
+  transform: translateY(-5px) !important;
 
   color: white !important;
 }
@@ -58,7 +58,7 @@
 }
 
 #home-icon:hover {
-  transform: translateY(-8px) !important;
+  transform: translateY(-5px) !important;
 
   color: white !important;
 }

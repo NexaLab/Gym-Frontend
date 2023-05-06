@@ -2,6 +2,7 @@ import { Layout, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import "./CustomSideBar.css"
 import { CalendarOutlined, HomeOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router';
 
 
 
@@ -13,6 +14,27 @@ const { Text } = Typography;
 
 
 function CustomSideBar() {
+
+
+  const history = useHistory();
+
+
+
+
+  const goToHome = () => {
+
+    history.push("/");
+  }
+
+
+
+
+  const goToMeetingSchedule = () => {
+
+    history.push("/meetingschedule");
+  }
+
+
   return (
 
 
@@ -32,6 +54,7 @@ function CustomSideBar() {
         }}
 
         id='home-icon'
+        onClick={goToHome}
       />
 
 
@@ -39,6 +62,8 @@ function CustomSideBar() {
 
 
       <CalendarOutlined
+
+        onClick={goToMeetingSchedule}
         id='calendar-icon'
         style=
         {{
