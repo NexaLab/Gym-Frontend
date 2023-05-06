@@ -3,18 +3,39 @@ import { Route, Switch } from "react-router-dom";
 import QrCode from "./components/QrCode/QrCode";
 import { Provider } from "react-redux";
 import store from "./store";
+import React, { Suspense } from "react";
+
+
+
+
+
+const Chat = React.lazy(() => import("./components/Chat/Chat"));
+const ManageTrainingClasses = React.lazy(() => import("./components/ManageTrainingClasses/ManageTrainingClasses"))
+
+
 
 
 
 function App() {
   return (
-    <div className="App">
-      <Provider store={store}>
+
+
+    <Provider store={store}>
+      <div className="App">
         <Switch>
-          <Route exact path="/" component={QrCode} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route
+              exact
+              path="/meetingschedule"
+              component={ManageTrainingClasses}
+            />
+            <Route exact path="/" component={Chat} />
+             <Route exact path="/qrCode" component={QrCode} />
+          </Suspense>
         </Switch>
-      </Provider>
-    </div>
+      </div>
+    </Provider>
+
   );
 }
 
