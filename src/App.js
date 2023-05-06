@@ -12,13 +12,14 @@ const Chat = React.lazy(() => import("./components/Chat/Chat"));
 const ManageTrainingClasses = React.lazy(() => import("./components/ManageTrainingClasses/ManageTrainingClasses"))
 const QrCode = React.lazy(() => import("./components/QrCode/QrCode"));
 const Payment = React.lazy(() => import("./components/Payment/Payment"));
-
+const Customers = React.lazy(() => import("./components/GymCustomer/Customers"));
 
 
 
 
 function App() {
   return (
+
 
 
     <Provider store={store}>
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/" component={Chat} />
             <Route exact path="/qrCode" component={QrCode} />
             <Route exact path="/payment" component={Payment} />
+            <Route exact path="/customers" component={Customers} />
           </Suspense>
         </Switch>
       </div>

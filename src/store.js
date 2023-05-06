@@ -6,6 +6,7 @@ import privateRoomSlice from "./services/PrivateRoomSlice";
 import senderAndReceiverSlice from "./services/SenderAndReceiverSlice";
 import messageSlice from "./services/MessageSlice";
 import PaymentSlice from "./services/PaymentSlice";
+import MembershipSlice from "./services/MembershipSlice";
 
 
 const store = configureStore({
@@ -17,8 +18,11 @@ const store = configureStore({
         privateRoomSlice: privateRoomSlice,
         senderAndReceiverSlice: senderAndReceiverSlice,
         messageSlice: messageSlice,
-        PaymentSlice: PaymentSlice
+        PaymentSlice: PaymentSlice,
+        MembershipSlice: MembershipSlice
     }
 })
+
+
 
 export default store;

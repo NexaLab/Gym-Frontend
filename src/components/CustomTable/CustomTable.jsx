@@ -65,7 +65,6 @@ function CustomTable({ searchValue }) {
     header: {
       marginBottom: 30,
       borderBottom: '1px solid black'
-
     },
     title: {
       fontSize: 30,
