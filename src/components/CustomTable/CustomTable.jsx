@@ -1,10 +1,10 @@
-import { Table, Modal, Layout, Divider,Typography, Button } from 'antd';
+import { Table, Modal, Layout, Divider, Typography, Button } from 'antd';
 import { useState } from 'react';
 import "./CustomTable.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPayment } from "../../services/PaymentSlice";
-import { PDFDownloadLink, Document, Page,Text, View, StyleSheet } from '@react-pdf/renderer';
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 
 
@@ -12,7 +12,7 @@ import { PDFDownloadLink, Document, Page,Text, View, StyleSheet } from '@react-p
 // const {Text} = Typography;
 
 
-function CustomTable({searchValue}) {
+function CustomTable({ searchValue }) {
 
   const [paymentInvoiceOfUser, setPaymentInvoiceOfUser] = useState({})
 
@@ -27,7 +27,7 @@ function CustomTable({searchValue}) {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -47,11 +47,11 @@ function CustomTable({searchValue}) {
         </View>
         <View style={styles.content}>
           <Text style={styles.heading}>Customer Detail:</Text>
-          <Text>Name: {paymentInvoiceOfUser && paymentInvoiceOfUser.firstName} {paymentInvoiceOfUser && paymentInvoiceOfUser.lastName}</Text>
-          <Text>Address: Kazimabad</Text>
-          <Text>Mobile: {paymentInvoiceOfUser && paymentInvoiceOfUser.phoneNo}</Text>
+          <Text style={styles.total}>Name: {paymentInvoiceOfUser && paymentInvoiceOfUser.firstName} {paymentInvoiceOfUser && paymentInvoiceOfUser.lastName}</Text>
+          <Text style={styles.total}>Address: Kazimabad</Text>
+          <Text style={styles.total}>Mobile: {paymentInvoiceOfUser && paymentInvoiceOfUser.phoneNo}</Text>
           <Text style={styles.heading}>Payment Details:</Text>
-          <Text>Amount:{paymentInvoiceOfUser && paymentInvoiceOfUser.price}$ </Text>
+          <Text style={styles.total}>Amount:{paymentInvoiceOfUser && paymentInvoiceOfUser.price}$ </Text>
         </View>
       </Page>
     </Document>
@@ -65,7 +65,7 @@ function CustomTable({searchValue}) {
     header: {
       marginBottom: 30,
       borderBottom: '1px solid black'
-      
+
     },
     title: {
       fontSize: 30,
@@ -73,7 +73,7 @@ function CustomTable({searchValue}) {
       marginBottom: 10,
     },
     subtitle: {
-      fontSize: 25,
+      fontSize: 18,
       textAlign: 'center',
     },
     content: {
@@ -86,10 +86,10 @@ function CustomTable({searchValue}) {
       marginBottom: 10,
       marginTop: 50,
       borderBottom: '1px solid black'
-      
+
     },
     total: {
-      fontSize: 18,
+      fontSize: 15,
       fontWeight: 'bold',
       marginTop: 10,
     },
@@ -128,7 +128,7 @@ function CustomTable({searchValue}) {
     },
     {
       title: 'Start Date',
-      dataIndex: 'startDate' ,
+      dataIndex: 'startDate',
       key: 6,
     },
     {
@@ -141,12 +141,12 @@ function CustomTable({searchValue}) {
       dataIndex: 'payment',
       key: 9,
       width: 100,
-      render: () => <span onClick={showModal} style={{color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgray', padding: 5 , cursor: 'pointer'}}>Invoice</span>,
+      render: () => <span onClick={showModal} style={{ color: 'white', fontWeight: 500, borderRadius: 10, backgroundColor: 'lightgray', padding: 5, cursor: 'pointer' }}>Invoice</span>,
     }
   ];
 
 
- 
+
 
 
   return (
@@ -154,7 +154,7 @@ function CustomTable({searchValue}) {
       <Table
         columns={columns}
         dataSource={searchValue == "" ? payment.data : payment.data.filter(data => {
-          if(data.firstName.toLocaleUpperCase().indexOf(searchValue.toLocaleUpperCase()) > -1) {
+          if (data.firstName.toLocaleUpperCase().indexOf(searchValue.toLocaleUpperCase()) > -1) {
 
             return data.firstName
 
@@ -170,23 +170,23 @@ function CustomTable({searchValue}) {
           },
         })}
       />
-       <Modal open={isModalOpen} onCancel={handleCancel} footer={[
+      <Modal open={isModalOpen} onCancel={handleCancel} footer={[
         <PDFDownloadLink
-        key="Download"
-        document={<Invoice />}
-        fileName="Invoice.pdf"
-      >
-        <Button style={{marginRight: '5px'}}>
-          Download Invoice
-        </Button>
-      </PDFDownloadLink>,
-          <Button key="ok" type="primary" onClick={handleOk}>
-           Ok
+          key="Download"
+          document={<Invoice />}
+          fileName="Invoice.pdf"
+        >
+          <Button style={{ marginRight: '5px' }}>
+            Download Invoice
+          </Button>
+        </PDFDownloadLink>,
+        <Button key="ok" type="primary" onClick={handleOk}>
+          Ok
         </Button>,
-      
+
       ]}>
-        <h2 style={{display: 'flex', justifyContent: 'center', fontWeight: 700, fontSize: 20}}>Fitness Gym</h2>
-        <Divider/>
+        <h2 style={{ display: 'flex', justifyContent: 'center', fontWeight: 700, fontSize: 20 }}>Fitness Gym</h2>
+        <Divider />
         <Layout className='payment-details'>
           <p>Name: {paymentInvoiceOfUser && paymentInvoiceOfUser.firstName}</p>
           <p>Address: Kazimabad</p>
@@ -195,12 +195,12 @@ function CustomTable({searchValue}) {
         <Layout className='payment-data'>
           <h3>Amount</h3>
         </Layout>
-        <Divider/>
+        <Divider />
         <Layout className='payment-data'>
           <h3>Total</h3>
           <p>{paymentInvoiceOfUser && paymentInvoiceOfUser.price}$</p>
         </Layout>
-        
+
       </Modal>
     </Layout>
   )

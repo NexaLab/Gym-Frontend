@@ -32,7 +32,7 @@ function App() {
             />
             <Route exact path="/" component={Chat} />
             <Route exact path="/qrCode" component={QrCode} />
-            <Route exact path="/" component={Payment} />
+            <Route exact path="/payment" component={Payment} />
           </Suspense>
         </Switch>
       </div>
