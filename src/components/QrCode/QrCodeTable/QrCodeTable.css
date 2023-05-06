@@ -1,27 +1,43 @@
 .barcode-header {
-
-    background-color: #ffff;
-    color: gray;
-    font-size: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    font-weight: bold;
+  background-color: #ffff;
+  color: gray;
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: bold;
 }
 
-.ant-table-thead .ant-table-cell{
-    background-color: lightgray !important;
+.ant-table-thead .ant-table-cell {
+  background-color: #f0f2f5 !important;
 }
 
 .edit-span {
-    color: green;
-    font-weight: bold;
-    cursor: pointer;
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .delete-span {
-    color: red;
-    font-weight: bold;
-    cursor: pointer;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qr--modal-form-item {
+  margin-top: 30px !important;
+}
+
+.progress-animation {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
