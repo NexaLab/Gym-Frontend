@@ -1,8 +1,8 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import Test from './components/Test/Test';
-import ManageTrainingClasses from './components/ManageTrainingClasses/ManageTrainingClasses';
-import Welcome from './components/Welcome/Welcome';
+import Login from './components/Login/Login';
+import store from './store';
+import { Provider } from 'react-redux';
 
 
 
@@ -10,12 +10,12 @@ import Welcome from './components/Welcome/Welcome';
 function App() {
   return (
     <div className="App">
-      
+       <Provider store={store}>
       <Switch>
-            <Route exact path="/meetingschedule"  component={ManageTrainingClasses}/>
-            <Route exact path="/"  component={Welcome}/>
+            {/* <Route exact path="/meetingschedule"  component={ManageTrainingClasses}/> */}
+            <Route exact path="/"  component={Login}/>
       </Switch>
-
+      </Provider>
     </div>
   );
 }
