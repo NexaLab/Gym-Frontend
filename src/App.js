@@ -1,7 +1,8 @@
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import store from "./store";
+import QrCode from "./components/QrCode/QrCode";
 import { Provider } from "react-redux";
+import store from "./store";
 import React, { Suspense } from "react";
 
 
@@ -29,6 +30,7 @@ function App() {
               component={ManageTrainingClasses}
             />
             <Route exact path="/" component={Chat} />
+             <Route exact path="/qrCode" component={QrCode} />
           </Suspense>
         </Switch>
       </div>
