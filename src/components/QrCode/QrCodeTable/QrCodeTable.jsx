@@ -1,4 +1,4 @@
-import { Layout, Table, Space, Image, Progress, Modal, Form, Input } from "antd";
+import { Layout, Table, Space, Image, Progress, Modal, Form, Input, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import "./QrCodeTable.css";
 import QRCode from "qrcode";
@@ -11,11 +11,10 @@ const { Header, Content } = Layout;
 
 
 
-function QrCodeTable() {
+function QrCodeTable({ urls, setUrls, generateQRFromVideoLinks }) {
 
 
 
-  const [urls, setUrls] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updatedVideoOfQRCode, setUpdatedVideoQRCode] = useState({
     key: 0,
@@ -28,7 +27,20 @@ function QrCodeTable() {
 
   const dispatch = useDispatch();
   const videosLists = useSelector(state => state.videoQRCodeSlice);
+  const [api, contextHolder] = notification.useNotification();
 
+
+
+
+  const openNotificationWithIcon = (type, message, description) => {
+
+    api[type]({
+      message: message,
+      description:
+        description
+    });
+
+  };
 
 
 
@@ -40,6 +52,9 @@ function QrCodeTable() {
   const onChangeName = (event) => {
     setUpdatedVideoQRCode({ ...updatedVideoOfQRCode, name: event.target.value })
   }
+
+
+
 
 
 
@@ -79,36 +94,7 @@ function QrCodeTable() {
 
 
 
-  const generateQRFromVideoLinks = async () => {
 
-
-    const response = await dispatch(getAllVideosLinksForQR());
-
-
-    response.payload.map(videoQRCodeData => {
-
-
-      QRCode.toDataURL(videoQRCodeData.link)
-        .then((url) => {
-
-
-          setUrls([...urls, { id: videoQRCodeData.id, url: url, link: videoQRCodeData.link }]);
-
-
-        })
-        .catch((err) => {
-
-
-          console.error(err);
-
-
-        });
-
-
-    })
-
-
-  }
 
 
 
@@ -192,6 +178,25 @@ function QrCodeTable() {
 
 
 
+
+
+
+
+    if (videosLists.isError == true) {
+
+      openNotificationWithIcon("error", "Error", "Might be a problem from your side or server side")
+
+    }
+
+
+    else {
+
+      openNotificationWithIcon("success", "Success", "QR Code has been updated successfully");
+
+    }
+
+
+
   };
 
 
@@ -199,8 +204,7 @@ function QrCodeTable() {
 
 
 
-
-
+  console.log(videosLists)
 
 
 
@@ -208,7 +212,7 @@ function QrCodeTable() {
 
   const deleteVideoLinkAndQR = async (videoOfQRCode) => {
 
-
+    console.log(videoOfQRCode)
 
     dispatch(deleteVideoOfQRCode({
       videoKey: videoOfQRCode.key
@@ -219,6 +223,24 @@ function QrCodeTable() {
     dispatch(deleteVideoOfQRCodeFromDatabase({
       videoLinkID: videoOfQRCode.key
     }));
+
+
+
+
+
+
+    if (videosLists.isError == true) {
+
+      openNotificationWithIcon("error", "Error", "Might be a problem from server side")
+
+    }
+
+
+    else {
+
+      openNotificationWithIcon("success", "Success", "QR Code has been deleted successfully");
+
+    }
 
 
 
@@ -237,6 +259,14 @@ function QrCodeTable() {
 
 
     generateQRFromVideoLinks();
+
+
+
+    if (videosLists.isError == true) {
+
+      openNotificationWithIcon("error", "Error", "Might be a problem from server side")
+
+    }
 
 
 
@@ -271,14 +301,11 @@ function QrCodeTable() {
 
       title: "QR",
       dataIndex: "qr",
-      render: () => {
-
-        return (
-          urls.map(url => <Space size="middle" key={url.id}>
-            <Image width={60} src={url.url} />
-          </Space>)
-        )
-
+      render: (text, record) => {
+        // find the URL corresponding to the current row's key
+        const url = urls.find((u) => u.id === record.key);
+        // render the URL, if found
+        return url ? <Image width={60} src={url.url} /> : null;
       },
 
 
@@ -411,6 +438,7 @@ function QrCodeTable() {
 
       </Modal>
 
+      {contextHolder}
 
     </Layout>
   );

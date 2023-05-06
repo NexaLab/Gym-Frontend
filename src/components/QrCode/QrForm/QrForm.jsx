@@ -1,15 +1,31 @@
 import React from 'react';
 import "./QrForm.css"
 import Layout from 'antd/es/layout/layout';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 import { addNewVideoOfQRCode, addNewVideoOfQRCodeInDatabase } from '../../../services/VideoQRCodeSlice';
 import { useDispatch, useSelector } from "react-redux"
 
 
-function QrForm() {
+function QrForm({ urls, setUrls, generateQRFromVideoLinks }) {
 
 
     const dispatch = useDispatch();
+    const videosLists = useSelector(state => state.videoQRCodeSlice);
+    const [api, contextHolder] = notification.useNotification();
+
+
+
+
+    const openNotificationWithIcon = (type, message, description) => {
+
+        api[type]({
+            message: message,
+            description:
+                description
+        });
+
+    };
+
 
 
 
@@ -19,18 +35,29 @@ function QrForm() {
     const onQrFormFinish = (values) => {
 
 
-        dispatch(addNewVideoOfQRCode({
-            key: Math.floor(Math.random() * 10),
-            name: values.videoName,
-            link: values.videoLink
-        }));
-
 
 
         dispatch(addNewVideoOfQRCodeInDatabase({
             name: values.videoName,
             link: values.videoLink
-        }))
+        }));
+
+
+        generateQRFromVideoLinks();
+
+
+        if (videosLists.isError == true) {
+
+            openNotificationWithIcon("error", "Error", "Might be a problem from your side or server side")
+
+        }
+
+
+        else {
+
+            openNotificationWithIcon("success", "Success", "QR Code has been added successfully");
+
+        }
 
 
     };
@@ -118,7 +145,7 @@ function QrForm() {
 
             </Form>
 
-
+            {contextHolder}
         </Layout>
     )
 }

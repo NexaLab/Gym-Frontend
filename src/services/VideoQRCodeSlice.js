@@ -43,7 +43,8 @@ export const deleteVideoOfQRCodeFromDatabase = createAsyncThunk("deleteVideosOfQ
 
 export const addNewVideoOfQRCodeInDatabase = createAsyncThunk("addNewVideoOfQRCodeInDatabase", async (data) => {
     try {
-        const response = await axios.post(`http://localhost:3001/videos/save`, data);
+        await axios.post(`http://localhost:3001/videos/save`, data);
+        const response = await axios.get("http://localhost:3001/videos/allLinks");
         return response.data.data;
     } catch (error) {
         console.log(error);
@@ -88,7 +89,8 @@ const VideoQRCodeSlice = createSlice({
     reducers: {
 
         deleteVideoOfQRCode: (state, action) => {
-            state.data.pop(video => video.key == action.payload.videoKey);
+            const newState = state.data.filter(video => video.key != action.payload.videoKey);
+            state.data = newState;
         },
 
 
@@ -122,6 +124,7 @@ const VideoQRCodeSlice = createSlice({
         });
 
         builder.addCase(getAllVideosLinksForQR.fulfilled, (state, action) => {
+            state.data = []
             state.isLoader = false;
             action.payload.map(data => state.data.push({
                 key: data.id,
@@ -163,7 +166,14 @@ const VideoQRCodeSlice = createSlice({
         });
 
         builder.addCase(addNewVideoOfQRCodeInDatabase.fulfilled, (state, action) => {
+            state.data = []
             state.isLoader = false;
+            action.payload.map(data => state.data.push({
+                key: data.id,
+                name: data.name,
+                link: data.link
+            }))
+
         });
 
         builder.addCase(addNewVideoOfQRCodeInDatabase.rejected, (state, action) => {
