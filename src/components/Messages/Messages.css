@@ -4,6 +4,7 @@
   height: 99vh !important;
   display: flex !important;
   flex-direction: column !important;
+  margin-top: 30px !important;
 }
 
 #message-receiver-heading-container {
