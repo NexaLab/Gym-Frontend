@@ -1,3 +1,4 @@
+import ReviewSlice from "./services/ReviewSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import videoQRCodeSlice from "./services/VideoQRCodeSlice";
 import loginSlice from "./services/LoginSlice"
@@ -10,9 +11,10 @@ import MembershipSlice from "./services/MembershipSlice";
 
 
 
+
 const store = configureStore({
     reducer: {
-
+        ReviewSlice: ReviewSlice,
         videoQRCodeSlice: videoQRCodeSlice,
         loginSlice: loginSlice,
         clientSlice: clientSlice,
@@ -21,9 +23,9 @@ const store = configureStore({
         messageSlice: messageSlice,
         PaymentSlice: PaymentSlice,
         MembershipSlice: MembershipSlice,
+
     }
 })
-
 
 
 export default store;
