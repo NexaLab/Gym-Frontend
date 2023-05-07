@@ -1,6 +1,5 @@
 import React, { memo, useEffect } from "react";
 import "./Chat.css";
-import { Layout } from "antd";
 import Users from "../Users/Users";
 import Messages from "../Messages/Messages";
 import { useHistory } from "react-router-dom";

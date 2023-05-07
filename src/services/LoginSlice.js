@@ -7,19 +7,22 @@ import axios from "axios";
 
 export const login = createAsyncThunk("login", async (userData) => {
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", userData);
-      return response.data.data;
-      
+        const response = await axios.post("http://localhost:3001/auth/login", userData);
+        return response.data.data;
+
     } catch (error) {
-      console.log(error);
-      throw error;
+        console.log(error);
+        throw error;
     }
-  });
+});
 
 const loginSlice = createSlice({
     name: "login",
     initialState: {
-        data: null,
+        data: {
+            token: "",
+            email: ""
+        },
         isLoader: false,
         isError: false
     },
@@ -41,7 +44,8 @@ const loginSlice = createSlice({
 
         builder.addCase(login.fulfilled, (state, action) => {
             state.isLoader = false;
-            state.data = action.payload
+            state.data.token = action.payload.token
+            state.data.email = action.payload.email
         })
 
 
@@ -52,5 +56,5 @@ const loginSlice = createSlice({
     }
 })
 
-export const {updateEmailAndPassword} = loginSlice.actions;
+export const { updateEmailAndPassword } = loginSlice.actions;
 export default loginSlice.reducer;
