@@ -3,6 +3,7 @@ import { Layout, Typography, Input, Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons';
 import "./Payment.css"
 import CustomTable from '../CustomTable/CustomTable';
+import CustomSideBar from '../Sidebar/CustomSideBar';
 
 
 
@@ -16,10 +17,13 @@ function Payment() {
   const [searchValue, setSearchValue] = useState("");
 
 
+
+
   const onSearch = (event) => {
     setSearchValue(event.target.value);
   }
   return (
+
     <Layout className='main'>
       <Header className='header-tag'>Payment<ArrowRightOutlined style={{ marginLeft: 10 }} /> </Header>
       <Layout className='search-feature'>
@@ -32,6 +36,7 @@ function Payment() {
         <CustomTable searchValue={searchValue} />
       </Layout>
     </Layout>
+
   )
 }
 

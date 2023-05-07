@@ -7,6 +7,7 @@ import QrForm from "./QrForm/QrForm";
 import { getAllVideosLinksForQR } from "../../services/VideoQRCodeSlice";
 import { useDispatch } from "react-redux"
 import QRCode from "qrcode";
+import CustomSideBar from "../Sidebar/CustomSideBar";
 
 
 
@@ -40,17 +41,23 @@ function QrCode() {
   }
 
   return (
-    <Layout className="main-layout">
-      <Header className="qr-header">
-        <h1>Barcode</h1>
-        <ArrowRightOutlined className="qr-arrow" />
-      </Header>
-      <Content className="qrCode-content">
-        <QrForm urls={urls} setUrls={setUrls} generateQRFromVideoLinks={generateQRFromVideoLinks} />
-        <Layout className="qrTable-layout">
-          <QrCodeTable urls={urls} setUrls={setUrls} generateQRFromVideoLinks={generateQRFromVideoLinks} />
-        </Layout>
-      </Content>
+    <Layout id="qr-main-sidebar-layout">
+      <CustomSideBar />
+      <Layout className="main-layout" style={{
+        width: "95%"
+      }}>
+
+        <Header className="qr-header">
+          <h1>Barcode</h1>
+          <ArrowRightOutlined className="qr-arrow" />
+        </Header>
+        <Content className="qrCode-content" style={{ backgroundColor: "#ffffff" }}>
+          <QrForm urls={urls} setUrls={setUrls} generateQRFromVideoLinks={generateQRFromVideoLinks} />
+          <Layout className="qrTable-layout">
+            <QrCodeTable urls={urls} setUrls={setUrls} generateQRFromVideoLinks={generateQRFromVideoLinks} />
+          </Layout>
+        </Content>
+      </Layout>
     </Layout>
   );
 }

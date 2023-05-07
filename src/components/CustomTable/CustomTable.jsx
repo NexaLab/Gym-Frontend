@@ -1,4 +1,4 @@
-import { Table, Modal, Layout, Divider, Typography, Button } from 'antd';
+import { Table, Modal, Layout, Divider, Typography, Button, notification } from 'antd';
 import { useState } from 'react';
 import "./CustomTable.css"
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { getAllPayment } from "../../services/PaymentSlice";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import { useHistory } from 'react-router-dom';
-import { updateEmail } from '../../services/CurrentReceiverSlice';
 
 
 
@@ -22,10 +21,37 @@ function CustomTable({ searchValue }) {
 
   const dispatch = useDispatch();
   const payment = useSelector((state) => state.PaymentSlice);
+  const [api, contextHolder] = notification.useNotification();
+
+
+  console.log(payment)
+
+  const openNotificationWithIcon = (type, message, description) => {
+
+    api[type]({
+      message: message,
+      description:
+        description
+    });
+
+  };
+
+
+
+
 
 
   useEffect(() => {
+
+
     dispatch(getAllPayment());
+
+
+    if (payment.isError == true) {
+      openNotificationWithIcon("error", "Error", "Might be a problem from server side")
+    }
+
+
   }, []);
 
 
@@ -165,7 +191,7 @@ function CustomTable({ searchValue }) {
 
 
   return (
-    <Layout>
+    <Layout style={{ backgroundColor: "#ffffff" }}>
       <Table
         columns={columns}
         dataSource={searchValue == "" ? payment.data : payment.data.filter(data => {
@@ -217,6 +243,7 @@ function CustomTable({ searchValue }) {
         </Layout>
 
       </Modal>
+      {contextHolder}
     </Layout>
   )
 }

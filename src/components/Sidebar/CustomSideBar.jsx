@@ -1,7 +1,7 @@
 import { Layout, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import "./CustomSideBar.css"
-import { CalendarOutlined, HomeOutlined } from '@ant-design/icons';
+import { CalendarOutlined, HomeOutlined, MessageOutlined, VideoCameraOutlined, MoneyCollectOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 
 
@@ -35,6 +35,37 @@ function CustomSideBar() {
   }
 
 
+
+  const goToChat = () => {
+
+    history.push("/chat")
+  }
+
+
+
+  const goToQRCode = () => {
+
+    history.push("/qrcode")
+  }
+
+
+
+  const goToPayments = () => {
+
+    history.push("/payment")
+  }
+
+
+
+  const goToCustomers = () => {
+
+    history.push("/customers")
+  }
+
+
+
+
+
   return (
 
 
@@ -50,7 +81,7 @@ function CustomSideBar() {
           color: "white",
           fontSize: 23,
           cursor: "pointer",
-          marginBottom:50
+          marginBottom: 50
         }}
 
         id='home-icon'
@@ -70,9 +101,75 @@ function CustomSideBar() {
           color: "white",
           fontSize: 23,
           cursor: "pointer",
-          marginBottom:50
+          marginBottom: 50
         }} />
 
+
+
+      <MessageOutlined
+
+
+        onClick={goToChat}
+        id='calendar-icon'
+        style=
+        {{
+          color: "white",
+          fontSize: 23,
+          cursor: "pointer",
+          marginBottom: 50
+        }}
+
+      />
+
+
+
+      <VideoCameraOutlined
+
+
+
+        onClick={goToQRCode}
+        id='calendar-icon'
+        style=
+        {{
+          color: "white",
+          fontSize: 23,
+          cursor: "pointer",
+          marginBottom: 50
+        }}
+
+      />
+
+
+
+
+      <MoneyCollectOutlined
+
+        onClick={goToPayments}
+        id='calendar-icon'
+        style=
+        {{
+          color: "white",
+          fontSize: 23,
+          cursor: "pointer",
+          marginBottom: 50
+        }}
+
+      />
+
+
+
+      <UsergroupAddOutlined
+
+        onClick={goToCustomers}
+        id='calendar-icon'
+        style=
+        {{
+          color: "white",
+          fontSize: 23,
+          cursor: "pointer",
+          marginBottom: 50
+        }}
+      />
 
     </Layout>
 

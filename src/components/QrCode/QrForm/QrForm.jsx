@@ -4,6 +4,7 @@ import Layout from 'antd/es/layout/layout';
 import { Form, Input, Button, notification } from 'antd';
 import { addNewVideoOfQRCode, addNewVideoOfQRCodeInDatabase } from '../../../services/VideoQRCodeSlice';
 import { useDispatch, useSelector } from "react-redux"
+import QRCode from "qrcode";
 
 
 function QrForm({ urls, setUrls, generateQRFromVideoLinks }) {
@@ -32,18 +33,30 @@ function QrForm({ urls, setUrls, generateQRFromVideoLinks }) {
 
 
 
-    const onQrFormFinish = (values) => {
+    const onQrFormFinish = async (values) => {
 
 
 
 
-        dispatch(addNewVideoOfQRCodeInDatabase({
+        const response = await dispatch(addNewVideoOfQRCodeInDatabase({
             name: values.videoName,
             link: values.videoLink
         }));
 
 
-        generateQRFromVideoLinks();
+
+
+
+
+        const newUrls = await Promise.all(response.payload.map(async videoQRCodeData => {
+            const url = await QRCode.toDataURL(videoQRCodeData.link);
+            return { id: videoQRCodeData.id, url: url, link: videoQRCodeData.link };
+        }));
+        setUrls(newUrls);
+
+
+
+
 
 
         if (videosLists.isError == true) {

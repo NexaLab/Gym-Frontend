@@ -204,7 +204,6 @@ function QrCodeTable({ urls, setUrls, generateQRFromVideoLinks }) {
 
 
 
-  console.log(videosLists)
 
 
 
