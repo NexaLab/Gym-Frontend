@@ -1,5 +1,5 @@
-import { Layout, Button, Form, Input } from "antd";
-import React from "react";
+import { Layout, Button, Form, Input, notification } from "antd";
+import React, { useEffect } from "react";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/LoginSlice"
@@ -8,12 +8,34 @@ import { useHistory } from "react-router-dom";
 
 
 function Login() {
+
+
+
+
   const [form] = Form.useForm();
 
   const dispatch = useDispatch();
 
-  const loginRes = useSelector(state => state.loginSlice)
+  const loginRes = useSelector(state => state.loginSlice);
+
   const history = useHistory();
+
+  const [api, contextHolder] = notification.useNotification();
+
+
+
+
+  const openNotificationWithIcon = (type, message, description) => {
+
+    api[type]({
+      message: message,
+      description:
+        description
+    });
+
+  };
+
+
 
 
 
@@ -25,20 +47,79 @@ function Login() {
     console.log('Failed:', errorInfo);
   };
 
+
+
+
+
   const onFinish = (values) => {
+
+
+
+
     dispatch(login({
       email: values.email,
       password: values.password
     }));
-    localStorage.setItem('jwt', loginRes && loginRes.data.token)
-    localStorage.setItem('email', loginRes && loginRes.data.email);
-    form.resetFields();
 
-    setTimeout(() => {
-      history.push('/chat');
-    }, 800)
+
+
+
+
+    if (loginRes.isError === true) {
+
+      openNotificationWithIcon("error", "Error", "Enter a correct details or might be a problem from server side");
+
+    }
+
+
+    else {
+
+
+
+      localStorage.setItem('jwt', loginRes && loginRes.data.token)
+      localStorage.setItem('email', loginRes && loginRes.data.email);
+      form.resetFields();
+
+
+
+      setTimeout(() => {
+        history.push('/');
+      }, 800)
+
+    }
+
+
+
+
 
   };
+
+
+
+
+
+
+
+
+  useEffect(() => {
+
+
+
+    if (localStorage.getItem("email") && localStorage.getItem("jwt")) {
+
+      history.push("/");
+    }
+
+
+
+
+  }, [])
+
+
+
+
+
+
 
   return (
     <Layout className="login-page">
@@ -77,6 +158,7 @@ function Login() {
           </div>
         </div>
       </Form>
+      {contextHolder}
     </Layout>
   );
 }

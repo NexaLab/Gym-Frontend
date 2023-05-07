@@ -4,7 +4,8 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import "./Payment.css"
 import CustomTable from '../CustomTable/CustomTable';
 import CustomSideBar from '../Sidebar/CustomSideBar';
-
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 const { Header } = Layout;
@@ -15,13 +16,39 @@ const { Text } = Typography;
 function Payment() {
 
   const [searchValue, setSearchValue] = useState("");
-
+  const history = useHistory();
 
 
 
   const onSearch = (event) => {
     setSearchValue(event.target.value);
   }
+
+
+
+
+  useEffect(() => {
+
+    if (!(localStorage.getItem("jwt") && localStorage.getItem("email"))) {
+
+      history.push("/login");
+
+    }
+
+
+
+
+
+  }, [])
+
+
+
+
+
+
+
+
+
   return (
 
     <Layout className='main'>

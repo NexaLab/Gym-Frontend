@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import "./QrCode.css";
@@ -8,7 +8,7 @@ import { getAllVideosLinksForQR } from "../../services/VideoQRCodeSlice";
 import { useDispatch } from "react-redux"
 import QRCode from "qrcode";
 import CustomSideBar from "../Sidebar/CustomSideBar";
-
+import { useHistory } from "react-router-dom";
 
 
 const { Header, Content } = Layout;
@@ -21,6 +21,7 @@ function QrCode() {
 
   const [urls, setUrls] = useState([]);
   const dispatch = useDispatch();
+  const history = useHistory();
 
 
   const generateQRFromVideoLinks = async () => {
@@ -39,6 +40,30 @@ function QrCode() {
 
 
   }
+
+
+
+
+
+
+
+  useEffect(() => {
+
+    if (!(localStorage.getItem("jwt") && localStorage.getItem("email"))) {
+
+      history.push("/login");
+
+    }
+
+
+
+
+
+  }, [])
+
+
+
+
 
   return (
     <Layout id="qr-main-sidebar-layout">
