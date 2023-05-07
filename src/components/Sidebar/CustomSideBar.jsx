@@ -1,7 +1,7 @@
 import { Layout, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import "./CustomSideBar.css"
-import { CalendarOutlined, HomeOutlined, MessageOutlined, VideoCameraOutlined, MoneyCollectOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { CalendarOutlined, HomeOutlined, MessageOutlined, VideoCameraOutlined, MoneyCollectOutlined, UsergroupAddOutlined, StarOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 
 
@@ -60,6 +60,14 @@ function CustomSideBar() {
   const goToCustomers = () => {
 
     history.push("/customers")
+  }
+
+
+
+
+  const goToReviews = () => {
+
+    history.push("/reviews")
   }
 
 
@@ -169,6 +177,22 @@ function CustomSideBar() {
           cursor: "pointer",
           marginBottom: 50
         }}
+      />
+
+
+
+      <StarOutlined
+
+        onClick={goToReviews}
+        id='calendar-icon'
+        style=
+        {{
+          color: "white",
+          fontSize: 23,
+          cursor: "pointer",
+          marginBottom: 50
+        }}
+
       />
 
     </Layout>

@@ -38,7 +38,7 @@ function App() {
             <Route exact path="/qrCode" component={QrCode} />
             <Route exact path="/payment" component={Payment} />
             <Route exact path="/customers" component={Customers} />
-            <Route exact path="/ratings" component={Ratings} />
+            <Route exact path="/reviews" component={Ratings} />
 
           </Suspense>
         </Switch>

@@ -1,10 +1,28 @@
+import ReviewSlice from "./services/ReviewSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import ReviewSlice from "./Services/ReviewSlice";
+import videoQRCodeSlice from "./services/VideoQRCodeSlice";
+import loginSlice from "./services/LoginSlice"
+import clientSlice from "./services/ClientSlice"
+import privateRoomSlice from "./services/PrivateRoomSlice";
+import senderAndReceiverSlice from "./services/SenderAndReceiverSlice";
+import messageSlice from "./services/MessageSlice";
+import PaymentSlice from "./services/PaymentSlice";
+import MembershipSlice from "./services/MembershipSlice";
+
+
 
 
 const store = configureStore({
     reducer: {
-       ReviewSlice: ReviewSlice
+        ReviewSlice: ReviewSlice,
+        videoQRCodeSlice: videoQRCodeSlice,
+        loginSlice: loginSlice,
+        clientSlice: clientSlice,
+        privateRoomSlice: privateRoomSlice,
+        senderAndReceiverSlice: senderAndReceiverSlice,
+        messageSlice: messageSlice,
+        PaymentSlice: PaymentSlice,
+        MembershipSlice: MembershipSlice,
 
     }
 })
