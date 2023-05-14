@@ -58,13 +58,18 @@ function Users() {
 
 
 
-
+  const getAllClientsList = async () => {
+    const response = await dispatch(getAllClients());
+    if (response.payload.length > 0) {
+      getPrivateRoom(response.payload[0]);
+    }
+  }
 
 
 
 
   useEffect(() => {
-    dispatch(getAllClients());
+    getAllClientsList();
   }, []);
 
 

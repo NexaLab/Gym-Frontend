@@ -51,12 +51,12 @@ function Login() {
 
 
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
 
 
 
 
-    dispatch(login({
+    const response = await dispatch(login({
       email: values.email,
       password: values.password
     }));
@@ -76,8 +76,8 @@ function Login() {
 
 
 
-      localStorage.setItem('jwt', loginRes && loginRes.data.token)
-      localStorage.setItem('email', loginRes && loginRes.data.email);
+      localStorage.setItem('jwt', loginRes && response.payload.token)
+      localStorage.setItem('email', loginRes && response.payload.email);
       form.resetFields();
 
 

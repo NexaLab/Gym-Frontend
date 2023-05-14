@@ -21,7 +21,8 @@ const loginSlice = createSlice({
     initialState: {
         data: {
             token: "",
-            email: ""
+            email: "",
+            password: ""
         },
         isLoader: false,
         isError: false
